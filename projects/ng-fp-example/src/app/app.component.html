@@ -1,0 +1,5 @@
+<div>Testing Fountainpay checkout angular sdk library</div>
+<div>
+    <button (click)="innitializePayment()">Pay now</button>
+    <fountainpay [config]="config" (onComplete)="onPayment($event)" (onClose)="onClose()">Make payment with FP Component</fountainpay>
+</div>

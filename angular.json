@@ -1,0 +1,141 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "fountainpay-angular": {
+      "projectType": "library",
+      "root": "projects/fountainpay-angular",
+      "sourceRoot": "projects/fountainpay-angular/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/fountainpay-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/fountainpay-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/fountainpay-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fountainpay-angular/src/test.ts",
+            "tsConfig": "projects/fountainpay-angular/tsconfig.spec.json",
+            "karmaConfig": "projects/fountainpay-angular/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ng-fp-example": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ng-fp-example",
+      "sourceRoot": "projects/ng-fp-example/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ng-fp-example",
+            "index": "projects/ng-fp-example/src/index.html",
+            "main": "projects/ng-fp-example/src/main.ts",
+            "polyfills": "projects/ng-fp-example/src/polyfills.ts",
+            "tsConfig": "projects/ng-fp-example/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/ng-fp-example/src/favicon.ico",
+              "projects/ng-fp-example/src/assets"
+            ],
+            "styles": [
+              "projects/ng-fp-example/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/ng-fp-example/src/environments/environment.ts",
+                  "with": "projects/ng-fp-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-fp-example:build:production"
+            },
+            "development": {
+              "browserTarget": "ng-fp-example:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-fp-example:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-fp-example/src/test.ts",
+            "polyfills": "projects/ng-fp-example/src/polyfills.ts",
+            "tsConfig": "projects/ng-fp-example/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-fp-example/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/ng-fp-example/src/favicon.ico",
+              "projects/ng-fp-example/src/assets"
+            ],
+            "styles": [
+              "projects/ng-fp-example/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}

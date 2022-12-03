@@ -1,0 +1,82 @@
+{
+  "name": "fountainpay-angular",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "copy:readme": "copyfiles ./README.md ./projects/fountainpay-angular",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "build:lib": "npm run copy:readme && ng build fountainpay-angular",
+    "format:check": "prettier --list-different 'projects/**/*.ts'",
+    "format:write": "prettier --write 'projects/**/*.ts'",
+    "format-package-json": "npm-run-all format-package-json:*",
+    "format-package-json:lib": "prettier --write 'projects/fountainpay-angular/package.json'",
+    "format-package-json:main": "prettier --write 'package.json'",
+    "test": "ng test",
+    "test:lib": "ng test fountainpay-angular",
+    "test:lib-coverage": "ng test fountainpay-angular --code-coverage --watch=false",
+    "publish:demo": "npx angular-cli-ghpages --dir=./dist/fountainpay-angular",
+    "adjust-version": "npm-run-all adjust-version:*",
+    "adjust-version:lib": "rjp projects/fountainpay-angular/package.json version $VERSION",
+    "adjust-version:main": "rjp package.json version $VERSION",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^14.2.0",
+    "@angular/common": "^14.2.0",
+    "@angular/compiler": "^14.2.0",
+    "@angular/core": "^14.2.0",
+    "@angular/forms": "^14.2.0",
+    "@angular/platform-browser": "^14.2.0",
+    "@angular/platform-browser-dynamic": "^14.2.0",
+    "@angular/router": "^14.2.0",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^14.2.10",
+    "@angular/cli": "~14.2.2",
+    "@angular/compiler-cli": "^14.2.0",
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "@commitlint/prompt": "^17.3.0",
+    "@types/jasmine": "~4.0.0",
+    "copyfiles": "^2.4.1",
+    "husky": "^8.0.2",
+    "jasmine-core": "~4.3.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "lint-staged": "^13.0.4",
+    "ng-packagr": "^14.2.0",
+    "prettier": "^2.8.0",
+    "typescript": "~4.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "projects/**/*.ts": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Foiuntain-Pay/fountainpay-angular.git"
+  }
+}
